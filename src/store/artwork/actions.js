@@ -28,3 +28,19 @@ export const fetchArtworkById = (id) => {
     }
   };
 };
+
+export const updateArtworkHearts = (artworkId) => {
+  return async (dispatch, getState) => {
+    try {
+      const response = await axios.patch(
+        `${API_URL}/artworks/${artworkId}`,
+        {}
+      );
+      console.log("response.data.artwork", response.data.artwork);
+
+      dispatch(artworkDetailsFetched(response.data.artwork));
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+};

@@ -1,6 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { allArtworks: [], artworkDetails: null };
+const initialState = {
+  allArtworks: [],
+  artworkDetails: null,
+};
 
 export const artworkSlice = createSlice({
   name: "artworks",

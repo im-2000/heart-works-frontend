@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
+import { FaHeart } from "react-icons";
 
 export default function ArtWork(props) {
   return (
@@ -17,9 +18,7 @@ export default function ArtWork(props) {
       />
       {props.email}
       <p>
-        HEARTS: {props.hearts} BIDS: {props.minimumBid}
-        {props.bidEmail}
-        {props.bidAmount}
+        HEARTs: {props.hearts} BIDS: {props.minimumBid}
       </p>
 
       {props.showLink && (

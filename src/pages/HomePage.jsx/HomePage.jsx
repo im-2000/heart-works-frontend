@@ -12,7 +12,7 @@ export default function HomePage() {
     dispatch(fetchArtworks());
   }, [dispatch]);
 
-  console.log("artworks", artworks);
+  // console.log("artworks", artworks);
   return (
     <div>
       {artworks.map((artwork) => {
