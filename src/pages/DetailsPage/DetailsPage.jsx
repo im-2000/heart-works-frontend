@@ -1,42 +1,40 @@
-// import React, { useEffect } from "react";
-// import { useSelector, useDispatch } from "react-redux";
-// import { useParams } from "react-router-dom";
-// import ArtWork from "../../components/Space/Space";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import ArtWork from "../../components/ArtWork/ArtWork";
 // import StoryCarousel from "../../components/StoryCarousel/StoryCarousel";
-// import Container from "react-bootstrap/Container";
-// import Loading from "../../components/Loading";
-// import { fetchSpaceById } from "../../store/space/actions";
-// import { selectSpaceDetails } from "../../store/space/selector";
+import Container from "react-bootstrap/Container";
+import Loading from "../../components/Loading";
+import { fetchArtworkById } from "../../store/artwork/actions";
+import { selectArtworkDetails } from "../../store/artwork/selectors";
 
-// export default function SpaceDetails() {
-//   const { id } = useParams();
-//   const space = useSelector(selectSpaceDetails);
-//   const dispatch = useDispatch();
+export default function DetailsPage() {
+  const { id } = useParams();
+  const artwork = useSelector(selectArtworkDetails);
+  const dispatch = useDispatch();
 
-//   useEffect(() => {
-//     dispatch(fetchSpaceById(id));
-//   }, [dispatch, id]);
+  useEffect(() => {
+    dispatch(fetchArtworkById(id));
+  }, [dispatch, id]);
 
-//   if (!space || parseInt(space.id) !== parseInt(id)) return <Loading />;
+  if (!artwork || parseInt(artwork.id) !== parseInt(id)) return <Loading />;
 
-//   return (
-//     <>
-//       <Space
-//         style={{
-//           backgroundColor: "black",
-//           color: space.color,
-//         }}
-//         id={space.id}
-//         title={space.title}
-//         description={space.description}
-//         backgroundColor={space.backgroundColor}
-//         color={space.color}
-//         showLink={false}
-//         storyname={space.story}
-//       />
-//       <Container>
-//         <StoryCarousel space={space} />
-//       </Container>
-//     </>
-//   );
-// }
+  return (
+    <>
+      <ArtWork
+        style={{}}
+        id={artwork.id}
+        title={artwork.title}
+        imageUrl={artwork.imageUrl}
+        hearts={artwork.hearts}
+        minimumBid={artwork.minimumBid}
+        bidEmail={artwork.bids.email}
+        bidAmount={artwork.bids.amount}
+        showLink={false}
+      />
+      {/* <Container>
+        <StoryCarousel space={space} />
+      </Container> */}
+    </>
+  );
+}

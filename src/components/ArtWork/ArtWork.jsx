@@ -15,12 +15,16 @@ export default function ArtWork(props) {
         src={props.imageUrl}
         alt={props.name}
       />
+      {props.email}
       <p>
         HEARTS: {props.hearts} BIDS: {props.minimumBid}
+        {props.bidEmail}
+        {props.bidAmount}
       </p>
+
       {props.showLink && (
         <Link to={`/artworks/${props.id}`}>
-          <Button>Visit space</Button>
+          <Button>View details</Button>
         </Link>
       )}
     </div>
