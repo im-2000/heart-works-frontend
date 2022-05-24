@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import ArtWork from "../../components/ArtWork/ArtWork";
 import Bid from "../../components/Bid/Bid";
 // import StoryCarousel from "../../components/StoryCarousel/StoryCarousel";
@@ -23,6 +23,7 @@ export default function DetailsPage() {
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
   const bids = useSelector(selectBids);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchArtworkById(id));
@@ -30,17 +31,9 @@ export default function DetailsPage() {
 
   if (!artwork || parseInt(artwork.id) !== parseInt(id)) return <Loading />;
 
-  //   if (token === null) {
-  //     navigate("/");
-  //   }
-
-  //   if (artwork === null) {
-  //     return <Loading />;
-  //   }
-
-  //   const displayButtons = profile?.id === artwork.userId;
-
-  //   console.log("bids", artwork.bids);
+  if (token === null) {
+    navigate("/");
+  }
 
   return (
     <div
@@ -114,8 +107,6 @@ export default function DetailsPage() {
           {token && <button onClick={() => dispatch(decreaseBids())}>-</button>}
         </div>
       </div>
-
-      {/* <div>{token && <Button>BID</Button>}</div> */}
     </div>
   );
 }
