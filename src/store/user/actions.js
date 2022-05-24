@@ -4,6 +4,7 @@ import { selectToken } from "./selectors";
 import { appLoading, appDoneLoading, setMessage } from "../appState/slice";
 import { showMessageWithTimeout } from "../appState/actions";
 import { loginSuccess, logOut, tokenStillValid } from "./slice";
+import { artworkPostSuccess } from "./slice";
 
 export const signUp = (name, email, password) => {
   return async (dispatch, getState) => {
@@ -101,7 +102,12 @@ export const getUserWithStoredToken = () => {
       });
 
       // token is still valid
-      dispatch(tokenStillValid({ user: response.data }));
+      dispatch(
+        tokenStillValid({
+          user: response.data.user,
+          artwork: response.data.artwork,
+        })
+      );
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {

@@ -1,4 +1,11 @@
-import { fetchArtworksSuccess, artworkDetailsFetched } from "./slice";
+import {
+  fetchArtworksSuccess,
+  artworkDetailsFetched,
+  bidsPostSuccess,
+} from "./slice";
+import { showMessageWithTimeout } from "../appState/actions";
+import { appLoading, appDoneLoading } from "../appState/slice";
+
 import axios from "axios";
 
 const API_URL = `http://localhost:4000`;
@@ -39,6 +46,37 @@ export const updateArtworkHearts = (artworkId) => {
       console.log("response.data.artwork", response.data.artwork);
 
       dispatch(artworkDetailsFetched(response.data.artwork));
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+};
+
+export const postBid = (amount) => {
+  return async (dispatch, getState) => {
+    try {
+      const { token } = getState().user;
+      const artwork = getState().artworkReducer.artworkDetails;
+
+      dispatch(appLoading());
+
+      const response = await axios.post(
+        `${API_URL}/artworks/${artwork.id}/bids`,
+        {
+          amount,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      dispatch(
+        showMessageWithTimeout("success", false, response.data.message, 3000)
+      );
+      dispatch(bidsPostSuccess(response.data));
+      dispatch(appDoneLoading());
     } catch (e) {
       console.log(e.message);
     }

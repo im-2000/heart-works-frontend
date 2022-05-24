@@ -2,29 +2,43 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import ArtWork from "../../components/ArtWork/ArtWork";
+import Bid from "../../components/Bid/Bid";
 // import StoryCarousel from "../../components/StoryCarousel/StoryCarousel";
-import Container from "react-bootstrap/Container";
+
 import Button from "react-bootstrap/Button";
 import Loading from "../../components/Loading";
 import { fetchArtworkById } from "../../store/artwork/actions";
 import {
   selectArtworkDetails,
-  selectHearts,
+  selectBids,
 } from "../../store/artwork/selectors";
-import { increaseHearts } from "../../store/artwork/slice";
-import { updateArtworkHearts } from "../../store/artwork/actions";
+import { increaseBids, decreaseBids } from "../../store/artwork/slice";
+import { updateArtworkHearts, postBid } from "../../store/artwork/actions";
+import { selectUser, selectToken } from "../../store/user/selectors";
 
 export default function DetailsPage() {
   const { id } = useParams();
   const artwork = useSelector(selectArtworkDetails);
+
   const dispatch = useDispatch();
-  const hearts = useSelector(selectHearts);
+  const token = useSelector(selectToken);
+  const bids = useSelector(selectBids);
 
   useEffect(() => {
     dispatch(fetchArtworkById(id));
   }, [dispatch, id]);
 
   if (!artwork || parseInt(artwork.id) !== parseInt(id)) return <Loading />;
+
+  //   if (token === null) {
+  //     navigate("/");
+  //   }
+
+  //   if (artwork === null) {
+  //     return <Loading />;
+  //   }
+
+  //   const displayButtons = profile?.id === artwork.userId;
 
   //   console.log("bids", artwork.bids);
 
@@ -42,23 +56,34 @@ export default function DetailsPage() {
         bidAmount={artwork.bids.amount}
         showLink={false}
       />
+      <Button onClick={() => dispatch(updateArtworkHearts(artwork.id))}>
+        Give Heart
+      </Button>
       <div>
         {" "}
         <h3>BIDS</h3>
         {artwork.bids.map((bid) => {
           return (
             <>
-              <p>
-                EMAIL: {bid.email}: {""}
-                AMOUNT: {bid.amount}
-              </p>
+              <Bid email={bid.email} amount={bid.amount} />
             </>
           );
         })}
       </div>
-      <Button onClick={() => dispatch(updateArtworkHearts(artwork.id))}>
-        Give Heart
-      </Button>
+      <div>
+        <p>
+          {token && (
+            <Button onClick={() => dispatch(postBid(bids))}>BID</Button>
+          )}
+        </p>
+        <div>
+          {token && <button onClick={() => dispatch(increaseBids())}>+</button>}
+          {token && <div>Amount, $ = {bids}</div>}
+          {token && <button onClick={() => dispatch(decreaseBids())}>-</button>}
+        </div>
+      </div>
+
+      {/* <div>{token && <Button>BID</Button>}</div> */}
     </>
   );
 }

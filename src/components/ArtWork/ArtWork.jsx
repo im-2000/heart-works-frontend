@@ -17,9 +17,9 @@ export default function ArtWork(props) {
         alt={props.name}
       />
       {props.email}
-      <p>
+      <h3>
         HEARTs: {props.hearts} BIDS: {props.minimumBid}
-      </p>
+      </h3>
 
       {props.showLink && (
         <Link to={`/artworks/${props.id}`}>
