@@ -4,16 +4,22 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
 import { postArtwork } from "../../store/artwork/actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { selectToken } from "../../store/user/selectors";
 
 export default function StartAuction() {
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [minimumBid, setMinimumBid] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const token = useSelector(selectToken);
 
   const navigate = useNavigate();
+
+  if (token === null) {
+    navigate("/");
+  }
 
   function submitForm(event) {
     event.preventDefault();

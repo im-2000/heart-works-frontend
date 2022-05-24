@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import ArtWork from "../../components/ArtWork/ArtWork";
 import Bid from "../../components/Bid/Bid";
-// import StoryCarousel from "../../components/StoryCarousel/StoryCarousel";
 
 import Button from "react-bootstrap/Button";
 import Loading from "../../components/Loading";
@@ -14,7 +13,7 @@ import {
 } from "../../store/artwork/selectors";
 import { increaseBids, decreaseBids } from "../../store/artwork/slice";
 import { updateArtworkHearts, postBid } from "../../store/artwork/actions";
-import { selectToken } from "../../store/user/selectors";
+import { selectToken, selectUser } from "../../store/user/selectors";
 
 export default function DetailsPage() {
   const { id } = useParams();
@@ -22,8 +21,7 @@ export default function DetailsPage() {
 
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
-  const bids = useSelector(selectBids);
-  const navigate = useNavigate();
+  const curentBid = useSelector(selectBids);
 
   useEffect(() => {
     dispatch(fetchArtworkById(id));
@@ -31,9 +29,14 @@ export default function DetailsPage() {
 
   if (!artwork || parseInt(artwork.id) !== parseInt(id)) return <Loading />;
 
-  if (token === null) {
-    navigate("/");
-  }
+  const minBidAmount = () => {
+    const maxBid = Math.max(...artwork.bids.map((b) => curentBid.amount));
+    if (artwork.bids.length > 0) {
+      return maxBid + 1;
+    } else {
+      return artwork.minimumBid;
+    }
+  };
 
   return (
     <div
@@ -88,24 +91,32 @@ export default function DetailsPage() {
           justifyContent: "center",
         }}
       >
-        <p>
-          {token && (
-            <Button onClick={() => dispatch(postBid(bids))}>BID</Button>
-          )}
-        </p>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          {token && <button onClick={() => dispatch(increaseBids())}>+</button>}
-          {token && <form></form>}
-          {token && <div>Amount, $ = {bids}</div>}
-          {token && <button onClick={() => dispatch(decreaseBids())}>-</button>}
-        </div>
+        {token && (
+          <>
+            <p>
+              <Button onClick={() => dispatch(postBid(curentBid))}>BID</Button>
+            </p>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <button onClick={() => dispatch(increaseBids())}>+</button>
+              <form></form>
+              <div>Amount, $ = {curentBid}</div>
+
+              <button
+                disabled={curentBid <= minBidAmount()}
+                onClick={() => dispatch(decreaseBids())}
+              >
+                -
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

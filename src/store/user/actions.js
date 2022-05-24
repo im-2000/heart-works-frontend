@@ -18,7 +18,6 @@ export const signUp = (name, email, password, isArtist) => {
         password,
         isArtist,
       });
-      dispatch(checkBoxStatus());
       dispatch(
         loginSuccess({ token: response.data.token, user: response.data.user })
       );

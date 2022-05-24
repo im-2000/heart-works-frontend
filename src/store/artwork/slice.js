@@ -24,10 +24,7 @@ export const artworkSlice = createSlice({
       state.bids = state.bids - 1;
     },
     bidsPostSuccess: (state, action) => {
-      state.artworkDetails = {
-        ...state.artworkDetails,
-        bids: [...state.artworkDetails.bids, action.payload.bid],
-      };
+      state.artworkDetails.bids.push(action.payload.bid);
     },
     artworkPostSuccess: (state, action) => {
       state.artwork.push(action.payload);

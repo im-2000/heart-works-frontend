@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   token: localStorage.getItem("token"),
   profile: null,
-  checkbox: false,
+  isArtist: false,
 };
 
 export const userSlice = createSlice({
@@ -23,13 +23,9 @@ export const userSlice = createSlice({
     tokenStillValid: (state, action) => {
       state.profile = action.payload.user;
     },
-    checkBoxStatus: (state, action) => {
-      state.checkbox = action.payload.user;
-    },
   },
 });
 
-export const { loginSuccess, logOut, tokenStillValid, checkBoxStatus } =
-  userSlice.actions;
+export const { loginSuccess, logOut, tokenStillValid } = userSlice.actions;
 
 export default userSlice.reducer;

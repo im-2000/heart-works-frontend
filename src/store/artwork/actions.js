@@ -4,7 +4,7 @@ import {
   bidsPostSuccess,
 } from "./slice";
 import { showMessageWithTimeout } from "../appState/actions";
-import { appLoading, appDoneLoading } from "../appState/slice";
+import { appLoading, appDoneLoading, setMessage } from "../appState/slice";
 
 import axios from "axios";
 
@@ -77,8 +77,27 @@ export const postBid = (amount) => {
       );
       dispatch(bidsPostSuccess(response.data));
       dispatch(appDoneLoading());
-    } catch (e) {
-      console.log(e.message);
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+        dispatch(
+          setMessage({
+            variant: "danger",
+            dismissable: true,
+            text: error.response.data.message,
+          })
+        );
+      } else {
+        console.log(error.message);
+        dispatch(
+          setMessage({
+            variant: "danger",
+            dismissable: true,
+            text: error.response.data.message,
+          })
+        );
+      }
+      dispatch(appDoneLoading());
     }
   };
 };
@@ -109,8 +128,27 @@ export const postArtwork = (title, minimumBid, imageUrl, navigate) => {
       const newArtworkId = response.data.newArtworkId;
       navigate(`/artworks/${newArtworkId}`);
       dispatch(appDoneLoading());
-    } catch (e) {
-      console.log(e.message);
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+        dispatch(
+          setMessage({
+            variant: "danger",
+            dismissable: true,
+            text: error.response.data.message,
+          })
+        );
+      } else {
+        console.log(error.message);
+        dispatch(
+          setMessage({
+            variant: "danger",
+            dismissable: true,
+            text: error.response.data.message,
+          })
+        );
+      }
+      dispatch(appDoneLoading());
     }
   };
 };
