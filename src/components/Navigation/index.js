@@ -15,8 +15,16 @@ export default function Navigation() {
 
   return (
     <Navbar bg="light" expand="lg">
-      <Navbar.Brand as={NavLink} to="/">
-        YOUR PROJECT NAME
+      <Navbar.Brand
+        style={{
+          marginLeft: 40,
+          fontSize: 30,
+          color: "purple",
+        }}
+        as={NavLink}
+        to="/"
+      >
+        HEART-WORKS
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">

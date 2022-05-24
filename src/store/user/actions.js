@@ -4,9 +4,11 @@ import { selectToken } from "./selectors";
 import { appLoading, appDoneLoading, setMessage } from "../appState/slice";
 import { showMessageWithTimeout } from "../appState/actions";
 import { loginSuccess, logOut, tokenStillValid } from "./slice";
-import { artworkPostSuccess } from "./slice";
+import { checkBoxStatus } from "./slice";
 
-export const signUp = (name, email, password) => {
+export const signUp = (name, email, password, isArtist) => {
+  console.log("isArtist", isArtist);
+
   return async (dispatch, getState) => {
     dispatch(appLoading());
     try {
@@ -14,8 +16,9 @@ export const signUp = (name, email, password) => {
         name,
         email,
         password,
+        isArtist,
       });
-
+      dispatch(checkBoxStatus());
       dispatch(
         loginSuccess({ token: response.data.token, user: response.data.user })
       );

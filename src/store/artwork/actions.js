@@ -82,3 +82,35 @@ export const postBid = (amount) => {
     }
   };
 };
+
+export const postArtwork = (title, minimumBid, imageUrl, navigate) => {
+  return async (dispatch, getState) => {
+    try {
+      const { token } = getState().user;
+
+      dispatch(appLoading());
+
+      const response = await axios.post(
+        `${API_URL}/artworks`,
+        {
+          title,
+          minimumBid,
+          imageUrl,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(
+        showMessageWithTimeout("success", false, response.data.message, 3000)
+      );
+      const newArtworkId = response.data.newArtworkId;
+      navigate(`/artworks/${newArtworkId}`);
+      dispatch(appDoneLoading());
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+};

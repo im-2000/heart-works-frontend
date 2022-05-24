@@ -4,6 +4,7 @@ const initialState = {
   allArtworks: [],
   artworkDetails: null,
   bids: 0,
+  artwork: null,
 };
 
 export const artworkSlice = createSlice({
@@ -23,7 +24,13 @@ export const artworkSlice = createSlice({
       state.bids = state.bids - 1;
     },
     bidsPostSuccess: (state, action) => {
-      state.bids.push(action.payload);
+      state.artworkDetails = {
+        ...state.artworkDetails,
+        bids: [...state.artworkDetails.bids, action.payload.bid],
+      };
+    },
+    artworkPostSuccess: (state, action) => {
+      state.artwork.push(action.payload);
     },
   },
 });
@@ -34,6 +41,7 @@ export const {
   increaseBids,
   decreaseBids,
   bidsPostSuccess,
+  artworkPostSuccess,
 } = artworkSlice.actions;
 
 export default artworkSlice.reducer;

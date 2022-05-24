@@ -1,11 +1,19 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
-import { FaHeart } from "react-icons";
+import { FaHeart } from "react-icons/fa";
+import { BiDollarCircle } from "react-icons/bi";
 
 export default function ArtWork(props) {
   return (
-    <div style={{}}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <h1>{props.title}</h1>
       <img
         style={{
@@ -18,7 +26,9 @@ export default function ArtWork(props) {
       />
       {props.email}
       <h3>
-        HEARTs: {props.hearts} BIDS: {props.minimumBid}
+        <FaHeart /> {props.hearts}
+        &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+        <BiDollarCircle /> {props.minimumBid}
       </h3>
 
       {props.showLink && (

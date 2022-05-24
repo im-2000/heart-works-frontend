@@ -3,8 +3,9 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
-import { postArtwork } from "../../store/user/actions";
+import { postArtwork } from "../../store/artwork/actions";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function StartAuction() {
   const dispatch = useDispatch();
@@ -12,12 +13,13 @@ export default function StartAuction() {
   const [minimumBid, setMinimumBid] = useState("");
   const [imageUrl, setImageUrl] = useState("");
 
-  // function submitForm(event) {
-  //   event.preventDefault();
+  const navigate = useNavigate();
 
-  //   // console.log(name, content, imageUrl);
-  //   dispatch(postArtwork(title, minimumBid, imageUrl));
-  // }
+  function submitForm(event) {
+    event.preventDefault();
+
+    dispatch(postArtwork(title, minimumBid, imageUrl, navigate));
+  }
 
   return (
     <Form as={Col} md={{ span: 6, offset: 3 }}>
@@ -60,7 +62,7 @@ export default function StartAuction() {
       </Form.Group>
 
       <Form.Group className="mt-5">
-        <Button variant="primary" type="submit">
+        <Button onClick={submitForm} variant="primary" type="submit">
           Post!
         </Button>
       </Form.Group>

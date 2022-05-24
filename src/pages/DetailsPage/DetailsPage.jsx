@@ -14,7 +14,7 @@ import {
 } from "../../store/artwork/selectors";
 import { increaseBids, decreaseBids } from "../../store/artwork/slice";
 import { updateArtworkHearts, postBid } from "../../store/artwork/actions";
-import { selectUser, selectToken } from "../../store/user/selectors";
+import { selectToken } from "../../store/user/selectors";
 
 export default function DetailsPage() {
   const { id } = useParams();
@@ -43,7 +43,14 @@ export default function DetailsPage() {
   //   console.log("bids", artwork.bids);
 
   return (
-    <>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       {/* <Bids bidsEmail={artwork.bids.email} bidsAmount={artwork.bids.amount} /> */}
       <ArtWork
         style={{}}
@@ -61,7 +68,17 @@ export default function DetailsPage() {
       </Button>
       <div>
         {" "}
-        <h3>BIDS</h3>
+        &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+        <h3
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          BIDS
+        </h3>
         {artwork.bids.map((bid) => {
           return (
             <>
@@ -70,20 +87,35 @@ export default function DetailsPage() {
           );
         })}
       </div>
-      <div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <p>
           {token && (
             <Button onClick={() => dispatch(postBid(bids))}>BID</Button>
           )}
         </p>
-        <div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           {token && <button onClick={() => dispatch(increaseBids())}>+</button>}
+          {token && <form></form>}
           {token && <div>Amount, $ = {bids}</div>}
           {token && <button onClick={() => dispatch(decreaseBids())}>-</button>}
         </div>
       </div>
 
       {/* <div>{token && <Button>BID</Button>}</div> */}
-    </>
+    </div>
   );
 }

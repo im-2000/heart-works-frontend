@@ -2,13 +2,12 @@ import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
-import { ToggleButtonCheckboxProps } from "react-bootstrap";
+
 import { signUp } from "../../store/user/actions";
 import { selectToken } from "../../store/user/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { Col } from "react-bootstrap";
-import { Checkbox } from "../../components/CheckBox/CheckBox";
 
 export default function SignUp() {
   const [name, setName] = useState("");
@@ -17,6 +16,7 @@ export default function SignUp() {
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
   const navigate = useNavigate();
+  const [checked, setChecked] = useState(false);
 
   useEffect(() => {
     if (token !== null) {
@@ -27,13 +27,13 @@ export default function SignUp() {
   function submitForm(event) {
     event.preventDefault();
 
-    dispatch(signUp(name, email, password));
+    dispatch(signUp(name, email, password, checked));
 
     setEmail("");
     setPassword("");
     setName("");
+    setChecked(false);
   }
-
   return (
     <Container>
       <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
@@ -72,7 +72,18 @@ export default function SignUp() {
             required
           />
         </Form.Group>
-        <Checkbox />
+
+        <div className="check-box">
+          <input
+            value={checked}
+            onClick={() => setChecked(!checked)}
+            type="checkbox"
+          />
+          <p>
+            <label> I am an artist</label>
+          </p>
+        </div>
+        {/* <Checkbox checked={checked} setChecked={setChecked} /> */}
         <Form.Group className="mt-5">
           <Button variant="primary" type="submit" onClick={submitForm}>
             Sign up
