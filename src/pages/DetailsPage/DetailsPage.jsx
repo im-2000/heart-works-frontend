@@ -13,7 +13,7 @@ import {
 } from "../../store/artwork/selectors";
 import { increaseBids, decreaseBids } from "../../store/artwork/slice";
 import { updateArtworkHearts, postBid } from "../../store/artwork/actions";
-import { selectToken, selectUser } from "../../store/user/selectors";
+import { selectToken } from "../../store/user/selectors";
 
 export default function DetailsPage() {
   const { id } = useParams();

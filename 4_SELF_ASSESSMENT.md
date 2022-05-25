@@ -2,17 +2,17 @@
 
 (This is a markdown .MD file, if you are reading this in vs-code, right click the file and select `Open Preview`)
 
-| Section                      | Max Points | Self    | Evaluator |
-| ---------------------------- | ---------- | ------- | --------- |
-| 0 Migrations, models & seeds | 8          | 8/8     | 0/8       |
-| 1 Artworks list              | 7          | 7/7     | 0/7       |
-| 2 Artwork details            | 4          | 4/4     | 0/4       |
-| 3 Giving hearts              | 5          | 5/5     | 0/5       |
-| 4 Bidding                    | 13         | 8/13    | 0/13      |
-| 5 Posting an artwork         | 11         | 8.5/11  | 0/11      |
-| 6 Signing up as an artist    | 7          | 4/7     | 0/7       |
-| 7 Finishing up               | 5          | 5/5     | 0/5       |
-| Total                        | 60         | 49.5/60 | 0/60      |
+| Section                      | Max Points | Self  | Evaluator |
+| ---------------------------- | ---------- | ----- | --------- |
+| 0 Migrations, models & seeds | 8          | 8/8   | 0/8       |
+| 1 Artworks list              | 7          | 7/7   | 0/7       |
+| 2 Artwork details            | 4          | 4/4   | 0/4       |
+| 3 Giving hearts              | 5          | 5/5   | 0/5       |
+| 4 Bidding                    | 13         | 13/13 | 0/13      |
+| 5 Posting an artwork         | 11         | 10/11 | 0/11      |
+| 6 Signing up as an artist    | 7          | 7/7   | 0/7       |
+| 7 Finishing up               | 5          | 5/5   | 0/5       |
+| Total                        | 60         | 59/60 | 0/60      |
 
 | 0. Criteria - Migrations, models & seeds                                   | Points | Self | Evaluator |
 | -------------------------------------------------------------------------- | ------ | ---- | --------- |
@@ -58,15 +58,15 @@
 | The new bid can be seen on the page without refreshing                                          | 2      | 2    |           |
 | An Authorization header is set in the request, and the endpoint works                           | 1      | 1    |           |
 | The auth middleware is used on the server side to authorize the request, and the endpoint works | 1      | 1    |           |
-| The minimum value of the input for amount in the frontend is the highest bid amount + 1         | 1      |      |           |
-| If there are no bids yet the minimum value is the `minimumBid` value from the artwork           | 2      |      |           |
-| The backend validates that the new bid is the highest bid so far                                | 2      |      |           |
-| Total                                                                                           | 13     | 8    |           |
+| The minimum value of the input for amount in the frontend is the highest bid amount + 1         | 1      | 1    |           |
+| If there are no bids yet the minimum value is the `minimumBid` value from the artwork           | 2      | 2    |           |
+| The backend validates that the new bid is the highest bid so far                                | 2      | 2    |           |
+| Total                                                                                           | 13     | 13   |           |
 
 | 5. Criteria - Posting an artwork                                                            | Points | Self | Evaluator |
 | ------------------------------------------------------------------------------------------- | ------ | ---- | --------- |
 | There is a link with `Start an auction` in the navbar                                       | 0.5    | 0.5  |           |
-| A user can only see this link when you are logged in and is an Artist                       | 1.5    |      |           |
+| A user can only see this link when you are logged in and is an Artist                       | 1.5    | 1.5  |           |
 | Clicking `Start an auction` links to a page with a form                                     | 0.5    | 0.5  |           |
 | The form contains inputs for title, minimum bid & imageUrl                                  | 0.5    | 0.5  |           |
 | When the form is submitted a POST request is sent to the server                             | 1      | 1    |           |
@@ -76,16 +76,16 @@
 | `userId` is not sent in the body or as a param of the request                               | 1      |      |           |
 | The user sees a success message if the artwork was posted successfully                      | 2      | 2    |           |
 | The success message is an alert, confirm or prompt popup or console.log                     | -1     |      |           |
-| Total                                                                                       | 11     | 8.5  |           |
+| Total                                                                                       | 11     | 10   |           |
 
 | 6. Criteria - Signing up as an artist                                              | Points | Self | Evaluator |
 | ---------------------------------------------------------------------------------- | ------ | ---- | --------- |
 | A separate migration is created to add a column `isArtist` to our users table      | 2      | 2    |           |
 | A checkbox is added to the signup form                                             | 1      | 1    |           |
 | The `signUp` action also sends a value for `isArtist` when posting to the server   | 1      | 1    |           |
-| When the checkbox is checked on signup, the user created has `isArtist: true`      | 2      |      |           |
-| When the checkbox is not checked on signup, the user created has `isArtist: false` | 1      |      |           |
-| Total                                                                              | 7      | 4    |           |
+| When the checkbox is checked on signup, the user created has `isArtist: true`      | 2      | 2    |           |
+| When the checkbox is not checked on signup, the user created has `isArtist: false` | 1      | 1    |           |
+| Total                                                                              | 7      | 7    |           |
 
 | 7. Criteria - Finishing up                                                 | Points | Self | Evaluator |
 | -------------------------------------------------------------------------- | ------ | ---- | --------- |

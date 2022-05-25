@@ -82,7 +82,7 @@ export default function SignUp() {
             <label> I am an artist</label>
           </p>
         </div>
-        {/* <Checkbox checked={checked} setChecked={setChecked} /> */}
+
         <Form.Group className="mt-5">
           <Button variant="primary" type="submit" onClick={submitForm}>
             Sign up

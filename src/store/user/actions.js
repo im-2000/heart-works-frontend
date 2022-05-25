@@ -4,7 +4,6 @@ import { selectToken } from "./selectors";
 import { appLoading, appDoneLoading, setMessage } from "../appState/slice";
 import { showMessageWithTimeout } from "../appState/actions";
 import { loginSuccess, logOut, tokenStillValid } from "./slice";
-import { checkBoxStatus } from "./slice";
 
 export const signUp = (name, email, password, isArtist) => {
   console.log("isArtist", isArtist);
