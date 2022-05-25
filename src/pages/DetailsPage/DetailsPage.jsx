@@ -29,6 +29,8 @@ export default function DetailsPage() {
 
   if (!artwork || parseInt(artwork.id) !== parseInt(id)) return <Loading />;
 
+  // Finding minimum Bid amount
+
   const minBidAmount = () => {
     const maxBid = Math.max(...artwork.bids.map((b) => curentBid.amount));
     if (artwork.bids.length > 0) {
@@ -47,7 +49,6 @@ export default function DetailsPage() {
         justifyContent: "center",
       }}
     >
-      {/* <Bids bidsEmail={artwork.bids.email} bidsAmount={artwork.bids.amount} /> */}
       <ArtWork
         style={{}}
         id={artwork.id}
@@ -65,7 +66,7 @@ export default function DetailsPage() {
       <div>
         {" "}
         &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-        <h3
+        <h5
           style={{
             display: "flex",
             flexDirection: "column",
@@ -73,8 +74,8 @@ export default function DetailsPage() {
             justifyContent: "center",
           }}
         >
-          BIDS
-        </h3>
+          Set your BID
+        </h5>
         {artwork.bids.map((bid) => {
           return (
             <>
@@ -105,7 +106,7 @@ export default function DetailsPage() {
               }}
             >
               <button onClick={() => dispatch(increaseBids())}>+</button>
-              <form></form>
+
               <div>Amount, $ = {curentBid}</div>
 
               <button

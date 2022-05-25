@@ -12,13 +12,14 @@ export default function ArtWork(props) {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
+        marginTop: 40,
       }}
     >
-      <h1>{props.title}</h1>
+      <h3>{props.title}</h3>
       <img
         style={{
-          maxWidth: 600,
-          maxHeight: 600,
+          maxWidth: 400,
+          maxHeight: 400,
         }}
         className="d-block w-100"
         src={props.imageUrl}
@@ -30,7 +31,6 @@ export default function ArtWork(props) {
         &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
         <BiDollarCircle /> {props.minimumBid}
       </h3>
-
       {props.showLink && (
         <Link to={`/artworks/${props.id}`}>
           <Button>View details</Button>
